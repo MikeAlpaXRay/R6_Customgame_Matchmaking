@@ -1,2 +1,2 @@
-# R6_Customgame_Matchmaking
-R6Tab based matchmaking 
+# R6 Customgame Matchmaking
+R6Tab data based matchmaking 
