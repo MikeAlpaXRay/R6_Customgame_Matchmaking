@@ -4,12 +4,19 @@ import json
 import re
 import tkinter as tk
 
+#ToDo: matchmaking
 DEFAULT_MMR = 2000
 
 
 class Player:
-    def __init__(self, player_name):
+    def __init__(self, player_name, player_id, last_checked, mmr):
         self.player_name = player_name
+        self.player_id = player_id
+        self.last_checked = last_checked
+        self.mmr = mmr
+
+    def new_player(self):
+        self.player_name = self.player_name
         self.player_id = self.check_id()
         if not self.player_id:
             raise ValueError
