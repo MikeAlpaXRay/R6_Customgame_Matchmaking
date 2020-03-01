@@ -3,38 +3,29 @@ import datetime
 import json
 import re
 import tkinter as tk
+import gui
 import gui_support
 
-#ToDo: matchmaking
+# ToDo: matchmaking
 DEFAULT_MMR = 2000
-
-def addPlayer(gui, no):
-    player_name = gui.Player_Entry.get()
-    gui_support.player1.set(player_name)
-    if player_name in player_name_list:
-        print("bekannt")
-    else:
-        for index, player in enumerate(player_list):
-            if player_id_list[index] == player.check_id():
-                print("neuer name")
-
-
+chosen_players = [None] * 10
+added_no_player = []
 
 
 class Player:
-    def __init__(self, player_name, player_id, last_checked, mmr):
+    def __init__(self, player_name, player_id, last_checked=True, mmr=True):
         self.player_name = player_name
-        self.player_id = player_id
-        self.last_checked = last_checked
-        self.mmr = mmr
-
-    def new_player(self):
-        self.player_name = self.player_name
-        self.player_id = self.check_id()
-        if not self.player_id:
-            raise ValueError
-        self.last_checked = False
-        self.mmr = self.update_mmr()
+        if last_checked and mmr:
+            if player_id:
+                self.player_id = player_id
+            else:
+                raise ValueError
+            self.last_checked = False
+            self.mmr = self.update_mmr()
+        else:
+            self.player_id = player_id
+            self.last_checked = last_checked
+            self.mmr = mmr
 
     def check_id(self):
         id_url = "https://r6tab.com/api/search.php?platform=uplay&search=" + self.player_name
@@ -52,6 +43,7 @@ class Player:
 
     def update_mmr(self):
         today = datetime.date.today()
+        diff = today - today
         if self.last_checked:
             last_checked = self.last_checked.split('-')
             last_checked_year = int(last_checked[0])
@@ -84,7 +76,7 @@ class Player:
             else:
                 return int(player_mmr / count)
 
-#ToDo: neuer name möglich
+
 class AutocompleteEntry(tk.Entry):
     def __init__(self, player_name_list, *args, **kwargs):
 
@@ -95,7 +87,8 @@ class AutocompleteEntry(tk.Entry):
             self.var = self["textvariable"] = tk.StringVar()
 
         self.var.trace('w', self.changed)
-        self.bind("<Right>", self.selection)
+        self.bind("<Right>", self.new_name)
+        self.bind("<Return>", self.selection)
         self.bind("<Up>", self.up)
         self.bind("<Down>", self.down)
 
@@ -112,7 +105,8 @@ class AutocompleteEntry(tk.Entry):
                 if not self.lb_up:
                     self.lb = tk.Listbox()
                     self.lb.bind("<Double-Button-1>", self.selection)
-                    self.lb.bind("<Right>", self.selection)
+                    self.lb.bind("<Return>", self.selection)
+                    self.lb.bind("<Right>", self.new_name)
                     self.lb.place(x=self.winfo_x(), y=self.winfo_y() + self.winfo_height())
                     self.lb_up = True
 
@@ -128,6 +122,14 @@ class AutocompleteEntry(tk.Entry):
 
         if self.lb_up:
             self.var.set(self.lb.get(tk.ACTIVE))
+            self.lb.destroy()
+            self.lb_up = False
+            self.icursor(tk.END)
+
+    def new_name(self, event):
+
+        if self.lb_up:
+            self.var.set(self.var.get())
             self.lb.destroy()
             self.lb_up = False
             self.icursor(tk.END)
@@ -187,19 +189,183 @@ def load_json():
     return player_name_list
 
 
-def save_json(player_list):
+def save_json():
     str_json = json.dumps(player_list, default=lambda o: o.__dict__, indent=4)
     json_file = open("player_data\\player_data.json", "w+")
     json_file.write(str_json)
     json_file.close()
 
 
+def addPlayer(gui, no):
+    player_added = False
+    new_player_name = gui.Player_Entry.get()
+    if new_player_name in player_name_list:
+        player_object = player_list[player_name_list.index(new_player_name)]
+        player_object.update_mmr()
+        player_name_list.remove(new_player_name)
+        player_added = True
+        chosen_players[no] = player_object
+        # print("update Spieler")
+    else:
+        new_player_id = check_id(new_player_name)
+        if new_player_id:
+            if new_player_id in player_id_list:
+                player_object = player_list[player_id_list.index(new_player_id)]
+                player_object.update_name(new_player_name)
+                player_name_list.remove(player_object.player_name)
+                player_object.update_mmr()
+                # print("neuer Spielername")
+            else:
+                player_object = Player(new_player_name, new_player_id)
+                player_list.append(player_object)
+                player_name_list.append(new_player_name)
+            player_added = True
+            chosen_players[no] = player_object
+
+        # else:
+        #     print("Spieler unbekannt")
+    return player_added
+
+
+def handle_add_player(gui, no):
+    player_added = addPlayer(gui, no - 1)
+    if player_added:
+        if no == 1:
+            if no in added_no_player:
+                player_name_list.append(gui_support.player1.get())
+                gui_support.player1.set(gui.Player_Entry.get())
+            else:
+                added_no_player.append(no)
+                gui_support.player1.set(gui.Player_Entry.get())
+        elif no == 2:
+            if no in added_no_player:
+                player_name_list.append(gui_support.player2.get())
+                gui_support.player2.set(gui.Player_Entry.get())
+            else:
+                added_no_player.append(no)
+                gui_support.player2.set(gui.Player_Entry.get())
+        elif no == 3:
+            if no in added_no_player:
+                player_name_list.append(gui_support.player3.get())
+                gui_support.player3.set(gui.Player_Entry.get())
+            else:
+                added_no_player.append(no)
+                gui_support.player3.set(gui.Player_Entry.get())
+        elif no == 4:
+            if no in added_no_player:
+                player_name_list.append(gui_support.player4.get())
+                gui_support.player4.set(gui.Player_Entry.get())
+            else:
+                added_no_player.append(no)
+                gui_support.player4.set(gui.Player_Entry.get())
+        elif no == 5:
+            if no in added_no_player:
+                player_name_list.append(gui_support.player5.get())
+                gui_support.player5.set(gui.Player_Entry.get())
+            else:
+                added_no_player.append(no)
+                gui_support.player5.set(gui.Player_Entry.get())
+        elif no == 6:
+            if no in added_no_player:
+                player_name_list.append(gui_support.player5.get())
+                gui_support.player6.set(gui.Player_Entry.get())
+            else:
+                added_no_player.append(no)
+                gui_support.player6.set(gui.Player_Entry.get())
+        elif no == 7:
+            if no in added_no_player:
+                player_name_list.append(gui_support.player7.get())
+                gui_support.player7.set(gui.Player_Entry.get())
+            else:
+                added_no_player.append(no)
+                gui_support.player7.set(gui.Player_Entry.get())
+        elif no == 8:
+            if no in added_no_player:
+                player_name_list.append(gui_support.player8.get())
+                gui_support.player8.set(gui.Player_Entry.get())
+            else:
+                added_no_player.append(no)
+                gui_support.player8.set(gui.Player_Entry.get())
+        elif no == 9:
+            if no in added_no_player:
+                player_name_list.append(gui_support.player9.get())
+                gui_support.player9.set(gui.Player_Entry.get())
+            else:
+                added_no_player.append(no)
+                gui_support.player9.set(gui.Player_Entry.get())
+        elif no == 10:
+            if no in added_no_player:
+                player_name_list.append(gui_support.player10.get())
+                gui_support.player10.set(gui.Player_Entry.get())
+            else:
+                added_no_player.append(no)
+                gui_support.player10.set(gui.Player_Entry.get())
+
+
+def handle_remove_player(gui, no):
+    if no == 1:
+        if no in added_no_player:
+            added_no_player.remove(no)
+            player_name_list.append(gui_support.player1.get())
+            gui_support.player1.set("Player " + str(no))
+    elif no == 2:
+        if no in added_no_player:
+            added_no_player.remove(no)
+            player_name_list.append(gui_support.player2.get())
+            gui_support.player2.set("Player " + str(no))
+    elif no == 3:
+        if no in added_no_player:
+            added_no_player.remove(no)
+            player_name_list.append(gui_support.player3.get())
+            gui_support.player3.set("Player " + str(no))
+    elif no == 4:
+        if no in added_no_player:
+            added_no_player.remove(no)
+            player_name_list.append(gui_support.player4.get())
+            gui_support.player4.set("Player " + str(no))
+    elif no == 5:
+        if no in added_no_player:
+            added_no_player.remove(no)
+            player_name_list.append(gui_support.player5.get())
+            gui_support.player5.set("Player " + str(no))
+    elif no == 6:
+        if no in added_no_player:
+            added_no_player.remove(no)
+            player_name_list.append(gui_support.player6.get())
+            gui_support.player6.set("Player " + str(no))
+    elif no == 7:
+        if no in added_no_player:
+            added_no_player.remove(no)
+            player_name_list.append(gui_support.player7.get())
+            gui_support.player7.set("Player " + str(no))
+    elif no == 8:
+        if no in added_no_player:
+            added_no_player.remove(no)
+            player_name_list.append(gui_support.player8.get())
+            gui_support.player8.set("Player " + str(no))
+    elif no == 9:
+        if no in added_no_player:
+            added_no_player.remove(no)
+            player_name_list.append(gui_support.player9.get())
+            gui_support.player9.set("Player " + str(no))
+    elif no == 10:
+        if no in added_no_player:
+            added_no_player.remove(no)
+            player_name_list.append(gui_support.player10.get())
+            gui_support.player10.set("Player " + str(no))
+
+
+def check_id(player_name):
+    id_url = "https://r6tab.com/api/search.php?platform=uplay&search=" + player_name
+    id_request = requests.get(id_url)
+    id_request = id_request.json()
+    if id_request['totalresults'] != 0:
+        id_request = id_request['results']
+        player_id = id_request[0]['p_id']
+    else:
+        player_id = False
+    return player_id
+
+
 if __name__ == "__main__":
     print()
-# try:
-#     player_list = load_json()
-#     player_list.append(Player("TheBiche."))
-#     save_json(player_list)
-#
-# except ValueError:
-#     print()

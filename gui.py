@@ -100,6 +100,7 @@ class Toplevel:
         self.removePlayer1_Button.configure(text='''<''')
         tooltip_font = "TkDefaultFont"
         ToolTip(self.removePlayer1_Button, tooltip_font, '''Remove Player''', delay=0.5)
+        self.removePlayer1_Button.configure(command=lambda: fnc.handle_remove_player(self, 1))
 
         self.addPlayer1_Button = tk.Button(self.Player_Canvas)
         self.addPlayer1_Button.place(relx=0.136, rely=0.156, height=20, width=20)
@@ -115,7 +116,7 @@ class Toplevel:
         self.addPlayer1_Button.configure(text='''>''')
         tooltip_font = "TkDefaultFont"
         ToolTip(self.addPlayer1_Button, tooltip_font, '''Add/Change Player''', delay=0.5)
-        self.addPlayer1_Button.configure(command=lambda : fnc.addPlayer(self, 1))
+        self.addPlayer1_Button.configure(command=lambda: fnc.handle_add_player(self, 1))
 
         self.Player1_Label = tk.Label(self.Player_Canvas)
         self.Player1_Label.place(relx=0.273, rely=0.156, height=20, width=120)
@@ -139,6 +140,7 @@ class Toplevel:
         self.removePlayer2_Button.configure(text='''<''')
         tooltip_font = "TkDefaultFont"
         ToolTip(self.removePlayer2_Button, tooltip_font, '''Remove Player''', delay=0.5)
+        self.removePlayer2_Button.configure(command=lambda: fnc.handle_remove_player(self, 2))
 
         self.addPlayer2_Button = tk.Button(self.Player_Canvas)
         self.addPlayer2_Button.place(relx=0.136, rely=0.234, height=20, width=20)
@@ -154,6 +156,7 @@ class Toplevel:
         self.addPlayer2_Button.configure(text='''>''')
         tooltip_font = "TkDefaultFont"
         ToolTip(self.addPlayer2_Button, tooltip_font, '''Add/Change Player''', delay=0.5)
+        self.addPlayer2_Button.configure(command=lambda: fnc.handle_add_player(self, 2))
 
         self.Player2_Label = tk.Label(self.Player_Canvas)
         self.Player2_Label.place(relx=0.273, rely=0.234, height=20, width=120)
@@ -178,6 +181,7 @@ class Toplevel:
         self.removePlayer3_Button.configure(text='''<''')
         tooltip_font = "TkDefaultFont"
         ToolTip(self.removePlayer3_Button, tooltip_font, '''Remove Player''', delay=0.5)
+        self.removePlayer3_Button.configure(command=lambda: fnc.handle_remove_player(self, 3))
 
         self.addPlayer3_Button = tk.Button(self.Player_Canvas)
         self.addPlayer3_Button.place(relx=0.136, rely=0.313, height=20, width=20)
@@ -193,6 +197,7 @@ class Toplevel:
         self.addPlayer3_Button.configure(text='''>''')
         tooltip_font = "TkDefaultFont"
         ToolTip(self.addPlayer3_Button, tooltip_font, '''Add/Change Player''', delay=0.5)
+        self.addPlayer3_Button.configure(command=lambda: fnc.handle_add_player(self, 3))
 
         self.Player3_Label = tk.Label(self.Player_Canvas)
         self.Player3_Label.place(relx=0.273, rely=0.313, height=20, width=120)
@@ -216,6 +221,7 @@ class Toplevel:
         self.removePlayer4_Button.configure(text='''<''')
         tooltip_font = "TkDefaultFont"
         ToolTip(self.removePlayer4_Button, tooltip_font, '''Remove Player''', delay=0.5)
+        self.removePlayer4_Button.configure(command=lambda: fnc.handle_remove_player(self, 4))
 
         self.addPlayer4_Button = tk.Button(self.Player_Canvas)
         self.addPlayer4_Button.place(relx=0.136, rely=0.391, height=20, width=20)
@@ -231,6 +237,7 @@ class Toplevel:
         self.addPlayer4_Button.configure(text='''>''')
         tooltip_font = "TkDefaultFont"
         ToolTip(self.addPlayer4_Button, tooltip_font, '''Add/Change Player''', delay=0.5)
+        self.addPlayer4_Button.configure(command=lambda: fnc.handle_add_player(self, 4))
 
         self.Player4_Label = tk.Label(self.Player_Canvas)
         self.Player4_Label.place(relx=0.273, rely=0.391, height=20, width=120)
@@ -255,21 +262,23 @@ class Toplevel:
         self.removePlayer5_Button.configure(text='''<''')
         tooltip_font = "TkDefaultFont"
         ToolTip(self.removePlayer5_Button, tooltip_font, '''Remove Player''', delay=0.5)
+        self.removePlayer5_Button.configure(command=lambda: fnc.handle_remove_player(self, 5))
 
-        self.addPlayer5_Player = tk.Button(self.Player_Canvas)
-        self.addPlayer5_Player.place(relx=0.136, rely=0.469, height=20, width=20)
-        self.addPlayer5_Player.configure(activebackground="#ececec")
-        self.addPlayer5_Player.configure(activeforeground="#000000")
-        self.addPlayer5_Player.configure(background="#d9d9d9")
-        self.addPlayer5_Player.configure(cursor="arrow")
-        self.addPlayer5_Player.configure(disabledforeground="#a3a3a3")
-        self.addPlayer5_Player.configure(foreground="#000000")
-        self.addPlayer5_Player.configure(highlightbackground="#d9d9d9")
-        self.addPlayer5_Player.configure(highlightcolor="black")
-        self.addPlayer5_Player.configure(pady="0")
-        self.addPlayer5_Player.configure(text='''>''')
+        self.addPlayer5_Button = tk.Button(self.Player_Canvas)
+        self.addPlayer5_Button.place(relx=0.136, rely=0.469, height=20, width=20)
+        self.addPlayer5_Button.configure(activebackground="#ececec")
+        self.addPlayer5_Button.configure(activeforeground="#000000")
+        self.addPlayer5_Button.configure(background="#d9d9d9")
+        self.addPlayer5_Button.configure(cursor="arrow")
+        self.addPlayer5_Button.configure(disabledforeground="#a3a3a3")
+        self.addPlayer5_Button.configure(foreground="#000000")
+        self.addPlayer5_Button.configure(highlightbackground="#d9d9d9")
+        self.addPlayer5_Button.configure(highlightcolor="black")
+        self.addPlayer5_Button.configure(pady="0")
+        self.addPlayer5_Button.configure(text='''>''')
         tooltip_font = "TkDefaultFont"
-        ToolTip(self.addPlayer5_Player, tooltip_font, '''Add/Change Player''', delay=0.5)
+        ToolTip(self.addPlayer5_Button, tooltip_font, '''Add/Change Player''', delay=0.5)
+        self.addPlayer5_Button.configure(command=lambda: fnc.handle_add_player(self, 5))
 
         self.Player5_Label = tk.Label(self.Player_Canvas)
         self.Player5_Label.place(relx=0.273, rely=0.469, height=20, width=120)
@@ -293,6 +302,7 @@ class Toplevel:
         self.removePlayer6_Button.configure(text='''<''')
         tooltip_font = "TkDefaultFont"
         ToolTip(self.removePlayer6_Button, tooltip_font, '''Remove Player''', delay=0.5)
+        self.removePlayer6_Button.configure(command=lambda: fnc.handle_remove_player(self, 6))
 
         self.addPlayer6_Button = tk.Button(self.Player_Canvas)
         self.addPlayer6_Button.place(relx=0.136, rely=0.547, height=20, width=20)
@@ -308,6 +318,7 @@ class Toplevel:
         self.addPlayer6_Button.configure(text='''>''')
         tooltip_font = "TkDefaultFont"
         ToolTip(self.addPlayer6_Button, tooltip_font, '''Add/Change Player''', delay=0.5)
+        self.addPlayer6_Button.configure(command=lambda: fnc.handle_add_player(self, 6))
 
         self.Player6_Label = tk.Label(self.Player_Canvas)
         self.Player6_Label.place(relx=0.273, rely=0.547, height=20, width=120)
@@ -331,6 +342,7 @@ class Toplevel:
         self.removePlayer7_Button.configure(text='''<''')
         tooltip_font = "TkDefaultFont"
         ToolTip(self.removePlayer7_Button, tooltip_font, '''Remove Player''', delay=0.5)
+        self.removePlayer7_Button.configure(command=lambda: fnc.handle_remove_player(self, 7))
 
         self.addPlayer7_Button = tk.Button(self.Player_Canvas)
         self.addPlayer7_Button.place(relx=0.136, rely=0.625, height=20, width=20)
@@ -346,6 +358,7 @@ class Toplevel:
         self.addPlayer7_Button.configure(text='''>''')
         tooltip_font = "TkDefaultFont"
         ToolTip(self.addPlayer7_Button, tooltip_font, '''Add/Change Player''', delay=0.5)
+        self.addPlayer7_Button.configure(command=lambda: fnc.handle_add_player(self, 7))
 
         self.Player7_Label = tk.Label(self.Player_Canvas)
         self.Player7_Label.place(relx=0.273, rely=0.625, height=20, width=120)
@@ -369,6 +382,7 @@ class Toplevel:
         self.removePlayer8_Button.configure(text='''<''')
         tooltip_font = "TkDefaultFont"
         ToolTip(self.removePlayer8_Button, tooltip_font, '''Remove Player''', delay=0.5)
+        self.removePlayer8_Button.configure(command=lambda: fnc.handle_remove_player(self, 8))
 
         self.addPlayer8_Button = tk.Button(self.Player_Canvas)
         self.addPlayer8_Button.place(relx=0.136, rely=0.703, height=20, width=20)
@@ -384,6 +398,7 @@ class Toplevel:
         self.addPlayer8_Button.configure(text='''>''')
         tooltip_font = "TkDefaultFont"
         ToolTip(self.addPlayer8_Button, tooltip_font, '''Add/Change Player''', delay=0.5)
+        self.addPlayer8_Button.configure(command=lambda: fnc.handle_add_player(self, 8))
 
         self.Player8_Label = tk.Label(self.Player_Canvas)
         self.Player8_Label.place(relx=0.273, rely=0.703, height=20, width=120)
@@ -407,6 +422,7 @@ class Toplevel:
         self.removePlayer9_Button.configure(text='''<''')
         tooltip_font = "TkDefaultFont"
         ToolTip(self.removePlayer9_Button, tooltip_font, '''Remove Player''', delay=0.5)
+        self.removePlayer9_Button.configure(command=lambda: fnc.handle_remove_player(self, 9))
 
         self.addPlayer9_Button = tk.Button(self.Player_Canvas)
         self.addPlayer9_Button.place(relx=0.136, rely=0.781, height=20, width=20)
@@ -422,6 +438,7 @@ class Toplevel:
         self.addPlayer9_Button.configure(text='''>''')
         tooltip_font = "TkDefaultFont"
         ToolTip(self.addPlayer9_Button, tooltip_font, '''Add/Change Player''', delay=0.5)
+        self.addPlayer9_Button.configure(command=lambda: fnc.handle_add_player(self, 9))
 
         self.Player9_Label = tk.Label(self.Player_Canvas)
         self.Player9_Label.place(relx=0.273, rely=0.781, height=20, width=120)
@@ -445,6 +462,7 @@ class Toplevel:
         self.removePlayer10_Button.configure(text='''<''')
         tooltip_font = "TkDefaultFont"
         ToolTip(self.removePlayer10_Button, tooltip_font, '''Remove Player''', delay=0.5)
+        self.removePlayer10_Button.configure(command=lambda: fnc.handle_remove_player(self, 10))
 
         self.addPlayer10_Button = tk.Button(self.Player_Canvas)
         self.addPlayer10_Button.place(relx=0.136, rely=0.859, height=20, width=20)
@@ -460,6 +478,7 @@ class Toplevel:
         self.addPlayer10_Button.configure(text='''>''')
         tooltip_font = "TkDefaultFont"
         ToolTip(self.addPlayer10_Button, tooltip_font, '''Add/Change Player''', delay=0.5)
+        self.addPlayer10_Button.configure(command=lambda: fnc.handle_add_player(self, 10))
 
         self.Player10_Label = tk.Label(self.Player_Canvas)
         self.Player10_Label.place(relx=0.273, rely=0.859, height=20, width=120)

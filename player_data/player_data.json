@@ -2,13 +2,25 @@
     {
         "player_name": "MikeAlpaXRayLFT",
         "player_id": "b3e3fc7c-9639-42d0-91e1-a67eec32c7ba",
-        "last_checked": "2020-02-29",
+        "last_checked": "2020-03-02",
         "mmr": 3543
+    },
+    {
+        "player_name": "Quegga.WH",
+        "player_id": "ab137c6f-51c5-41ea-bb78-5979bacc0a29",
+        "last_checked": "2020-03-02",
+        "mmr": 3202
     },
     {
         "player_name": "Lillbert",
         "player_id": "e1c35a45-2959-4118-b2fc-1d7e9f54ebe7",
-        "last_checked": "2020-02-29",
-        "mmr": 3623
+        "last_checked": "2020-03-02",
+        "mmr": 3618
+    },
+    {
+        "player_name": "one.DR",
+        "player_id": "0b601fd8-2271-4b60-9387-a33a863d7133",
+        "last_checked": "2020-03-02",
+        "mmr": 3097
     }
 ]
