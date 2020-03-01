@@ -14,6 +14,7 @@ def vp_start_gui(player_name_list):
     global val, w, root
     root = tk.Tk()
     gui_support.set_Tk_var()
+    global top
     top = Toplevel(root, player_name_list)
     gui_support.init(root, top)
     root.mainloop()
@@ -59,7 +60,7 @@ class Toplevel:
         top.configure(background="#d9d9d9")
 
         self.Player_Entry = fnc.AutocompleteEntry(player_name_list, top)
-        self.Player_Entry.place(relx=0.047, rely=0.083, height=20, relwidth=0.188)
+        self.Player_Entry.place(relx=0.047, rely=0.083, height=20, width=150)
         self.Player_Entry.configure(background="white")
         self.Player_Entry.configure(disabledforeground="#a3a3a3")
         self.Player_Entry.configure(font="TkFixedFont")
@@ -114,6 +115,7 @@ class Toplevel:
         self.addPlayer1_Button.configure(text='''>''')
         tooltip_font = "TkDefaultFont"
         ToolTip(self.addPlayer1_Button, tooltip_font, '''Add/Change Player''', delay=0.5)
+        self.addPlayer1_Button.configure(command=lambda : fnc.addPlayer(self, 1))
 
         self.Player1_Label = tk.Label(self.Player_Canvas)
         self.Player1_Label.place(relx=0.273, rely=0.156, height=20, width=120)

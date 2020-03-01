@@ -3,9 +3,22 @@ import datetime
 import json
 import re
 import tkinter as tk
+import gui_support
 
 #ToDo: matchmaking
 DEFAULT_MMR = 2000
+
+def addPlayer(gui, no):
+    player_name = gui.Player_Entry.get()
+    gui_support.player1.set(player_name)
+    if player_name in player_name_list:
+        print("bekannt")
+    else:
+        for index, player in enumerate(player_list):
+            if player_id_list[index] == player.check_id():
+                print("neuer name")
+
+
 
 
 class Player:
@@ -71,7 +84,7 @@ class Player:
             else:
                 return int(player_mmr / count)
 
-
+#ToDo: neuer name möglich
 class AutocompleteEntry(tk.Entry):
     def __init__(self, player_name_list, *args, **kwargs):
 
@@ -156,7 +169,22 @@ def load_json():
         json_data = json.load(json_file)
         for entry in json_data:
             players.append(entry)
-    return players
+
+    global player_list
+    player_list = []
+    for player in players:
+        player_list.append(Player(player['player_name'],
+                                  player['player_id'],
+                                  player['last_checked'],
+                                  player['mmr']))
+    global player_name_list
+    player_name_list = []
+    global player_id_list
+    player_id_list = []
+    for player in player_list:
+        player_name_list.append(player.player_name)
+        player_id_list.append(player.player_id)
+    return player_name_list
 
 
 def save_json(player_list):
