@@ -4,8 +4,6 @@ from time import time, localtime, strftime
 import functions as fnc
 import gui_support
 
-# ToDo:_changePlayer function
-
 py3 = True
 
 
