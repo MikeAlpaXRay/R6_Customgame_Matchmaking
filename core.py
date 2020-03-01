@@ -20,4 +20,3 @@ if __name__ == "__main__":
         player_name_list.append(player.player_name)
         player_id_list.append(player.player_id)
     print(player_name_list)
-    gui.gui_handler(player_name_list)
