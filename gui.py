@@ -4,7 +4,7 @@ from time import time, localtime, strftime
 import functions as fnc
 import gui_support
 
-#ToDo:_changePlayer function
+# ToDo:_changePlayer function
 
 py3 = True
 
@@ -14,27 +14,32 @@ def vp_start_gui(player_name_list):
     global val, w, root
     root = tk.Tk()
     gui_support.set_Tk_var()
-    top = Toplevel (root, player_name_list)
+    top = Toplevel(root, player_name_list)
     gui_support.init(root, top)
     root.mainloop()
 
+
 w = None
-def create_Toplevel(rt, *args, **kwargs):
+
+
+def create_toplevel(rt, *args, **kwargs):
     '''Starting point when module is imported by another module.
        Correct form of call: 'create_Toplevel1(root, *args, **kwargs)' .'''
     global w, w_win, root
-    #rt = root
+    # rt = root
     root = rt
-    w = tk.Toplevel (root)
+    w = tk.Toplevel(root)
     gui_support.set_Tk_var()
-    top = Toplevel (w)
+    top = Toplevel(w)
     gui_support.init(w, top, *args, **kwargs)
     return (w, top)
 
-def destroy_Toplevel():
+
+def destroy_toplevel():
     global w
     w.destroy()
     w = None
+
 
 class Toplevel:
     def __init__(self, top=None, player_name_list=[]):
@@ -42,9 +47,9 @@ class Toplevel:
            top is the toplevel containing window.'''
         _bgcolor = '#d9d9d9'  # X11 color: 'gray85'
         _fgcolor = '#000000'  # X11 color: 'black'
-        _compcolor = '#d9d9d9' # X11 color: 'gray85'
-        _ana1color = '#d9d9d9' # X11 color: 'gray85'
-        _ana2color = '#ececec' # Closest X11 color: 'gray92'
+        _compcolor = '#d9d9d9'  # X11 color: 'gray85'
+        _ana1color = '#d9d9d9'  # X11 color: 'gray85'
+        _ana2color = '#ececec'  # Closest X11 color: 'gray92'
 
         top.geometry("640x480+1152+156")
         top.minsize(500, 360)
@@ -54,7 +59,7 @@ class Toplevel:
         top.configure(background="#d9d9d9")
 
         self.Player_Entry = fnc.AutocompleteEntry(player_name_list, top)
-        self.Player_Entry.place(relx=0.047, rely=0.083, height=20 , relwidth=0.188)
+        self.Player_Entry.place(relx=0.047, rely=0.083, height=20, relwidth=0.188)
         self.Player_Entry.configure(background="white")
         self.Player_Entry.configure(disabledforeground="#a3a3a3")
         self.Player_Entry.configure(font="TkFixedFont")
@@ -64,7 +69,7 @@ class Toplevel:
         ToolTip(self.Player_Entry, tooltip_font, '''Enter Playername''', delay=0.5)
 
         self.Player_Canvas = tk.Canvas(top)
-        self.Player_Canvas.place(relx=0.047, rely=0.146, relheight=0.667 , relwidth=0.344)
+        self.Player_Canvas.place(relx=0.047, rely=0.146, relheight=0.667, relwidth=0.344)
         self.Player_Canvas.configure(background="#d9d9d9")
         self.Player_Canvas.configure(borderwidth="2")
         self.Player_Canvas.configure(cursor="arrow")
@@ -74,14 +79,14 @@ class Toplevel:
         self.Player_Canvas.configure(selectforeground="black")
 
         self.PlayerCanvas_Label = tk.Label(self.Player_Canvas)
-        self.PlayerCanvas_Label.place(relx=0.091, rely=0.063, height=20 , width=50)
+        self.PlayerCanvas_Label.place(relx=0.091, rely=0.063, height=20, width=50)
         self.PlayerCanvas_Label.configure(background="#d9d9d9")
         self.PlayerCanvas_Label.configure(disabledforeground="#a3a3a3")
         self.PlayerCanvas_Label.configure(foreground="#000000")
         self.PlayerCanvas_Label.configure(text='''Players:''')
 
         self.removePlayer1_Button = tk.Button(self.Player_Canvas)
-        self.removePlayer1_Button.place(relx=0.045, rely=0.156, height=20 , width=20)
+        self.removePlayer1_Button.place(relx=0.045, rely=0.156, height=20, width=20)
         self.removePlayer1_Button.configure(activebackground="#ececec")
         self.removePlayer1_Button.configure(activeforeground="#000000")
         self.removePlayer1_Button.configure(background="#d9d9d9")
@@ -119,7 +124,7 @@ class Toplevel:
         self.Player1_Label.configure(textvariable=gui_support.player1)
 
         self.removePlayer2_Button = tk.Button(self.Player_Canvas)
-        self.removePlayer2_Button.place(relx=0.045, rely=0.234, height=20 , width=20)
+        self.removePlayer2_Button.place(relx=0.045, rely=0.234, height=20, width=20)
         self.removePlayer2_Button.configure(activebackground="#ececec")
         self.removePlayer2_Button.configure(activeforeground="#000000")
         self.removePlayer2_Button.configure(background="#d9d9d9")
@@ -158,7 +163,7 @@ class Toplevel:
         self.Player2_Label.configure(textvariable=gui_support.player2)
 
         self.removePlayer3_Button = tk.Button(self.Player_Canvas)
-        self.removePlayer3_Button.place(relx=0.045, rely=0.313, height=20 , width=20)
+        self.removePlayer3_Button.place(relx=0.045, rely=0.313, height=20, width=20)
         self.removePlayer3_Button.configure(activebackground="#ececec")
         self.removePlayer3_Button.configure(activeforeground="#000000")
         self.removePlayer3_Button.configure(background="#d9d9d9")
@@ -196,7 +201,7 @@ class Toplevel:
         self.Player3_Label.configure(textvariable=gui_support.player3)
 
         self.removePlayer4_Button = tk.Button(self.Player_Canvas)
-        self.removePlayer4_Button.place(relx=0.045, rely=0.391, height=20 , width=20)
+        self.removePlayer4_Button.place(relx=0.045, rely=0.391, height=20, width=20)
         self.removePlayer4_Button.configure(activebackground="#ececec")
         self.removePlayer4_Button.configure(activeforeground="#000000")
         self.removePlayer4_Button.configure(background="#d9d9d9")
@@ -235,7 +240,7 @@ class Toplevel:
         self.Player4_Label.configure(textvariable=gui_support.player4)
 
         self.removePlayer5_Button = tk.Button(self.Player_Canvas)
-        self.removePlayer5_Button.place(relx=0.045, rely=0.469, height=20 , width=20)
+        self.removePlayer5_Button.place(relx=0.045, rely=0.469, height=20, width=20)
         self.removePlayer5_Button.configure(activebackground="#ececec")
         self.removePlayer5_Button.configure(activeforeground="#000000")
         self.removePlayer5_Button.configure(background="#d9d9d9")
@@ -273,7 +278,7 @@ class Toplevel:
         self.Player5_Label.configure(textvariable=gui_support.player5)
 
         self.removePlayer6_Button = tk.Button(self.Player_Canvas)
-        self.removePlayer6_Button.place(relx=0.045, rely=0.547, height=20 , width=20)
+        self.removePlayer6_Button.place(relx=0.045, rely=0.547, height=20, width=20)
         self.removePlayer6_Button.configure(activebackground="#ececec")
         self.removePlayer6_Button.configure(activeforeground="#000000")
         self.removePlayer6_Button.configure(background="#d9d9d9")
@@ -311,7 +316,7 @@ class Toplevel:
         self.Player6_Label.configure(textvariable=gui_support.player6)
 
         self.removePlayer7_Button = tk.Button(self.Player_Canvas)
-        self.removePlayer7_Button.place(relx=0.045, rely=0.625, height=20 , width=20)
+        self.removePlayer7_Button.place(relx=0.045, rely=0.625, height=20, width=20)
         self.removePlayer7_Button.configure(activebackground="#ececec")
         self.removePlayer7_Button.configure(activeforeground="#000000")
         self.removePlayer7_Button.configure(background="#d9d9d9")
@@ -349,7 +354,7 @@ class Toplevel:
         self.Player7_Label.configure(textvariable=gui_support.player7)
 
         self.removePlayer8_Button = tk.Button(self.Player_Canvas)
-        self.removePlayer8_Button.place(relx=0.045, rely=0.703, height=20 , width=20)
+        self.removePlayer8_Button.place(relx=0.045, rely=0.703, height=20, width=20)
         self.removePlayer8_Button.configure(activebackground="#ececec")
         self.removePlayer8_Button.configure(activeforeground="#000000")
         self.removePlayer8_Button.configure(background="#d9d9d9")
@@ -387,7 +392,7 @@ class Toplevel:
         self.Player8_Label.configure(textvariable=gui_support.player8)
 
         self.removePlayer9_Button = tk.Button(self.Player_Canvas)
-        self.removePlayer9_Button.place(relx=0.045, rely=0.781, height=20 , width=20)
+        self.removePlayer9_Button.place(relx=0.045, rely=0.781, height=20, width=20)
         self.removePlayer9_Button.configure(activebackground="#ececec")
         self.removePlayer9_Button.configure(activeforeground="#000000")
         self.removePlayer9_Button.configure(background="#d9d9d9")
@@ -425,7 +430,7 @@ class Toplevel:
         self.Player9_Label.configure(textvariable=gui_support.player9)
 
         self.removePlayer10_Button = tk.Button(self.Player_Canvas)
-        self.removePlayer10_Button.place(relx=0.045, rely=0.859, height=20 , width=20)
+        self.removePlayer10_Button.place(relx=0.045, rely=0.859, height=20, width=20)
         self.removePlayer10_Button.configure(activebackground="#ececec")
         self.removePlayer10_Button.configure(activeforeground="#000000")
         self.removePlayer10_Button.configure(background="#d9d9d9")
@@ -440,7 +445,7 @@ class Toplevel:
         ToolTip(self.removePlayer10_Button, tooltip_font, '''Remove Player''', delay=0.5)
 
         self.addPlayer10_Button = tk.Button(self.Player_Canvas)
-        self.addPlayer10_Button.place(relx=0.136, rely=0.859, height=20 , width=20)
+        self.addPlayer10_Button.place(relx=0.136, rely=0.859, height=20, width=20)
         self.addPlayer10_Button.configure(activebackground="#ececec")
         self.addPlayer10_Button.configure(activeforeground="#000000")
         self.addPlayer10_Button.configure(background="#d9d9d9")
@@ -471,7 +476,7 @@ class Toplevel:
         self.PlayerEntry_Label.configure(text='''Player:''')
 
         self.Matchmaking_Text = tk.Text(top)
-        self.Matchmaking_Text.place(relx=0.422, rely=0.146, relheight=0.667 , relwidth=0.531)
+        self.Matchmaking_Text.place(relx=0.422, rely=0.146, relheight=0.667, relwidth=0.531)
         self.Matchmaking_Text.configure(background="white")
         self.Matchmaking_Text.configure(cursor="arrow")
         self.Matchmaking_Text.configure(font="TkTextFont")
@@ -482,6 +487,7 @@ class Toplevel:
         self.Matchmaking_Text.configure(selectbackground="#c4c4c4")
         self.Matchmaking_Text.configure(selectforeground="black")
         self.Matchmaking_Text.configure(wrap="word")
+
 
 # ======================================================
 # Modified by Rozen to remove Tkinter import statements and to receive
@@ -498,6 +504,7 @@ class ToolTip(tk.Toplevel):
     To apply a ToolTip to any Tkinter widget, simply pass the widget to the
     ToolTip constructor
     """
+
     def __init__(self, wdgt, tooltip_font, msg=None, msgFunc=None,
                  delay=0.25, follow=True):
         """
@@ -534,8 +541,8 @@ class ToolTip(tk.Toplevel):
         self.lastMotion = 0
         # The text of the ToolTip is displayed in a Message widget
         tk.Message(self, textvariable=self.msgVar, bg='#FFFFDD',
-                font=tooltip_font,
-                aspect=1000).grid()
+                   font=tooltip_font,
+                   aspect=1000).grid()
 
         # Add bindings to the widget.  This will NOT override
         # bindings that the widget already has
@@ -579,7 +586,7 @@ class ToolTip(tk.Toplevel):
             self.visible = 1
 
         # Offset the ToolTip 10x10 pixes southwest of the pointer
-        self.geometry('+%i+%i' % (event.x_root+20, event.y_root-10))
+        self.geometry('+%i+%i' % (event.x_root + 20, event.y_root - 10))
         try:
             # Try to call the message function.  Will not change
             # the message if the message function is None or
@@ -597,6 +604,7 @@ class ToolTip(tk.Toplevel):
         """
         self.visible = 0
         self.withdraw()
+
 
 # ===========================================================
 #                   End of Class ToolTip

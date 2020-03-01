@@ -1,7 +1,9 @@
 import sys
 import tkinter as tk
 import tkinter.ttk as ttk
+
 py3 = True
+
 
 def set_Tk_var():
     global player1
@@ -35,11 +37,13 @@ def set_Tk_var():
     player10 = tk.StringVar()
     player10.set('Player 10')
 
+
 def init(top, gui, *args, **kwargs):
     global w, top_level, root
     w = gui
     top_level = top
     root = top
+
 
 def destroy_window():
     # Function which closes the window.
@@ -47,10 +51,8 @@ def destroy_window():
     top_level.destroy()
     top_level = None
 
+
 if __name__ == '__main__':
     import unknown
+
     unknown.vp_start_gui()
-
-
-
-
