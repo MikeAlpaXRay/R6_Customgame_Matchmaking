@@ -1,3 +1,4 @@
+import sys
 import tkinter as tk
 import tkinter.ttk as ttk
 py3 = True

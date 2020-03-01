@@ -19,4 +19,4 @@ if __name__ == "__main__":
     for player in player_list:
         player_name_list.append(player.player_name)
         player_id_list.append(player.player_id)
-    print(player_name_list)
+    gui.vp_start_gui(player_name_list)
