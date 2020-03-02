@@ -1,43 +1,9 @@
 import tkinter as tk
-import tkinter.ttk as ttk
-from time import time, localtime, strftime
 import functions as fnc
 import gui_support
 
 py3 = True
-
-
-def vp_start_gui(player_name_list):
-    '''Starting point when module is the main routine.'''
-    global val, w, root
-    root = tk.Tk()
-    gui_support.set_Tk_var()
-    global top
-    top = Toplevel(root, player_name_list)
-    gui_support.init(root, top)
-    root.mainloop()
-
-
 w = None
-
-
-def create_toplevel(rt, *args, **kwargs):
-    '''Starting point when module is imported by another module.
-       Correct form of call: 'create_Toplevel1(root, *args, **kwargs)' .'''
-    global w, w_win, root
-    # rt = root
-    root = rt
-    w = tk.Toplevel(root)
-    gui_support.set_Tk_var()
-    top = Toplevel(w)
-    gui_support.init(w, top, *args, **kwargs)
-    return (w, top)
-
-
-def destroy_toplevel():
-    global w
-    w.destroy()
-    w = None
 
 
 class Toplevel:
@@ -494,60 +460,39 @@ class Toplevel:
         self.PlayerEntry_Label.configure(foreground="#000000")
         self.PlayerEntry_Label.configure(text='''Player:''')
 
-        self.Matchmaking_Text = tk.Text(top)
+        self.Matchmaking_Text = tk.Label(top)
         self.Matchmaking_Text.place(relx=0.422, rely=0.146, relheight=0.667, relwidth=0.531)
         self.Matchmaking_Text.configure(background="white")
         self.Matchmaking_Text.configure(cursor="arrow")
-        self.Matchmaking_Text.configure(font="TkTextFont")
-        self.Matchmaking_Text.configure(foreground="black")
-        self.Matchmaking_Text.configure(highlightbackground="#d9d9d9")
-        self.Matchmaking_Text.configure(highlightcolor="black")
-        self.Matchmaking_Text.configure(insertbackground="black")
-        self.Matchmaking_Text.configure(selectbackground="#c4c4c4")
-        self.Matchmaking_Text.configure(selectforeground="black")
-        self.Matchmaking_Text.configure(wrap="word")
+        self.Matchmaking_Text.configure(disabledforeground="#a3a3a3")
+        self.Matchmaking_Text.configure(foreground="#000000")
+        self.Matchmaking_Text.configure(textvariable=gui_support.matchmake_text)
 
-
-# ======================================================
-# Modified by Rozen to remove Tkinter import statements and to receive
-# the font as an argument.
-# ======================================================
-# Found the original code at:
-# http://code.activestate.com/recipes/576688-tooltip-for-tkinter/
-# ======================================================
+        self.Matchmake_Button = tk.Button(top)
+        self.Matchmake_Button.place(relx=0.422, rely=0.083, height=20, width=120)
+        self.Matchmake_Button.configure(activebackground="#ececec")
+        self.Matchmake_Button.configure(activeforeground="#000000")
+        self.Matchmake_Button.configure(background="#d9d9d9")
+        self.Matchmake_Button.configure(disabledforeground="#a3a3a3")
+        self.Matchmake_Button.configure(foreground="#000000")
+        self.Matchmake_Button.configure(highlightbackground="#d9d9d9")
+        self.Matchmake_Button.configure(highlightcolor="black")
+        self.Matchmake_Button.configure(pady="0")
+        self.Matchmake_Button.configure(text='''Matchmake''')
+        self.Matchmake_Button.configure(textvariable=gui_support.matchmake)
+        self.Matchmake_Button.configure(command=fnc.matchmake)
 
 
 class ToolTip(tk.Toplevel):
-    """
-    Provides a ToolTip widget for Tkinter.
-    To apply a ToolTip to any Tkinter widget, simply pass the widget to the
-    ToolTip constructor
-    """
 
     def __init__(self, wdgt, tooltip_font, msg=None, msgFunc=None,
                  delay=0.25, follow=True):
-        """
-        Initialize the ToolTip
-
-        Arguments:
-          wdgt: The widget this ToolTip is assigned to
-          tooltip_font: Font to be used
-          msg:  A static string message assigned to the ToolTip
-          msgFunc: A function that retrieves a string to use as the ToolTip text
-          delay:   The delay in seconds before the ToolTip appears(may be float)
-          follow:  If True, the ToolTip follows motion, otherwise hides
-        """
         self.wdgt = wdgt
-        # The parent of the ToolTip is the parent of the ToolTips widget
         self.parent = self.wdgt.master
-        # Initalise the Toplevel
         tk.Toplevel.__init__(self, self.parent, bg='black', padx=1, pady=1)
-        # Hide initially
         self.withdraw()
-        # The ToolTip Toplevel should have no frame or title bar
         self.overrideredirect(True)
 
-        # The msgVar will contain the text displayed by the ToolTip
         self.msgVar = tk.StringVar()
         if msg is None:
             self.msgVar.set('No message provided')
@@ -558,76 +503,85 @@ class ToolTip(tk.Toplevel):
         self.follow = follow
         self.visible = 0
         self.lastMotion = 0
-        # The text of the ToolTip is displayed in a Message widget
         tk.Message(self, textvariable=self.msgVar, bg='#FFFFDD',
                    font=tooltip_font,
                    aspect=1000).grid()
 
-        # Add bindings to the widget.  This will NOT override
-        # bindings that the widget already has
         self.wdgt.bind('<Enter>', self.spawn, '+')
         self.wdgt.bind('<Leave>', self.hide, '+')
         self.wdgt.bind('<Motion>', self.move, '+')
 
     def spawn(self, event=None):
-        """
-        Spawn the ToolTip.  This simply makes the ToolTip eligible for display.
-        Usually this is caused by entering the widget
+        :
 
-        Arguments:
-          event: The event that called this funciton
-        """
-        self.visible = 1
-        # The after function takes a time argument in miliseconds
-        self.after(int(self.delay * 1000), self.show)
+    The
+    event
+    that
+    called
+    this
+    funciton
+    """
+    self.visible = 1
+    self.after(int(self.delay * 1000), self.show)
 
-    def show(self):
-        """
-        Displays the ToolTip if the time delay has been long enough
-        """
-        if self.visible == 1 and time() - self.lastMotion > self.delay:
-            self.visible = 2
-        if self.visible == 2:
-            self.deiconify()
+def show(self):
+    if self.visible == 1 and time() - self.lastMotion > self.delay:
+        self.visible = 2
+    if self.visible == 2:
+        self.deiconify()
 
-    def move(self, event):
-        """
-        Processes motion within the widget.
-        Arguments:
-          event: The event that called this function
-        """
-        self.lastMotion = time()
-        # If the follow flag is not set, motion within the
-        # widget will make the ToolTip disappear
-        #
-        if self.follow is False:
-            self.withdraw()
-            self.visible = 1
-
-        # Offset the ToolTip 10x10 pixes southwest of the pointer
-        self.geometry('+%i+%i' % (event.x_root + 20, event.y_root - 10))
-        try:
-            # Try to call the message function.  Will not change
-            # the message if the message function is None or
-            # the message function fails
-            self.msgVar.set(self.msgFunc())
-        except:
-            pass
-        self.after(int(self.delay * 1000), self.show)
-
-    def hide(self, event=None):
-        """
-        Hides the ToolTip.  Usually this is caused by leaving the widget
-        Arguments:
-          event: The event that called this function
-        """
-        self.visible = 0
+def move(self, event):
+    self.lastMotion = time()
+    if self.follow is False:
         self.withdraw()
+        self.visible = 1
+
+    self.geometry('+%i+%i' % (event.x_root + 20, event.y_root - 10))
+    try:
+        self.msgVar.set(self.msgFunc())
+    except:
+        pass
+    self.after(int(self.delay * 1000), self.show)
+
+def hide(self, event=None):
+    self.visible = 0
+    self.withdraw()
 
 
-# ===========================================================
-#                   End of Class ToolTip
-# ===========================================================
+
+def vp_start_gui(player_name_list):
+'''Starting point when module is the main routine.'''
+global val, w, root
+root = tk.Tk()
+gui_support.set_Tk_var()
+global top
+top = Toplevel(root, player_name_list)
+gui_support.init(root, top)
+root.mainloop()
+
+
+
+
+def create_toplevel(rt, *args, **kwargs):
+'''Starting point when module is imported by another module.
+   Correct form of call: 'create_Toplevel1(root, *args, **kwargs)' .'''
+global w, w_win, root
+# rt = root
+root = rt
+w = tk.Toplevel(root)
+gui_support.set_Tk_var()
+top = Toplevel(w)
+gui_support.init(w, top, *args, **kwargs)
+return (w, top)
+
+
+def destroy_toplevel():
+global w
+w.destroy()
+w = None
+
+
+
 
 if __name__ == '__main__':
-    vp_start_gui()
+vp_start_gui()

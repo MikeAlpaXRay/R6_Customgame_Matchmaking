@@ -1,11 +1,16 @@
-import sys
 import tkinter as tk
-import tkinter.ttk as ttk
 
 py3 = True
 
 
 def set_Tk_var():
+    global match_make
+    match_make = tk.StringVar()
+    match_make.set('Matchmake')
+    global match_make_text
+    match_make_text = tk.StringVar()
+    match_make_text.set('')
+
     global player1
     player1 = tk.StringVar()
     player1.set('Player 1')

@@ -1,7 +1,3 @@
-import clipboard
-import tkinter as tk
-from operator import itemgetter
-import re
 import functions as fnc
 import gui
 

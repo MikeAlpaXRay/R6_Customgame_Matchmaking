@@ -2,11 +2,11 @@ import requests
 import datetime
 import json
 import re
+import clipboard
 import tkinter as tk
-import gui
+from operator import itemgetter
 import gui_support
 
-# ToDo: matchmaking
 DEFAULT_MMR = 2000
 chosen_players = [None] * 10
 added_no_player = []
@@ -196,13 +196,15 @@ def save_json():
     json_file.close()
 
 
-def addPlayer(gui, no):
+# ToDo bei change in playernameliste none back to name
+def add_player(gui, no):
     player_added = False
     new_player_name = gui.Player_Entry.get()
     if new_player_name in player_name_list:
-        player_object = player_list[player_name_list.index(new_player_name)]
+        index = player_name_list.index(new_player_name)
+        player_object = player_list[index]
         player_object.update_mmr()
-        player_name_list.remove(new_player_name)
+        player_name_list[index] = ""
         player_added = True
         chosen_players[no] = player_object
         # print("update Spieler")
@@ -210,9 +212,10 @@ def addPlayer(gui, no):
         new_player_id = check_id(new_player_name)
         if new_player_id:
             if new_player_id in player_id_list:
-                player_object = player_list[player_id_list.index(new_player_id)]
+                index = player_id_list.index(new_player_id)
+                player_object = player_list[index]
                 player_object.update_name(new_player_name)
-                player_name_list.remove(player_object.player_name)
+                player_name_list[index] = ""
                 player_object.update_mmr()
                 # print("neuer Spielername")
             else:
@@ -228,7 +231,8 @@ def addPlayer(gui, no):
 
 
 def handle_add_player(gui, no):
-    player_added = addPlayer(gui, no - 1)
+    gui_support.matchmake.set("Matchmake")
+    player_added = add_player(gui, no - 1)
     if player_added:
         if no == 1:
             if no in added_no_player:
@@ -365,6 +369,126 @@ def check_id(player_name):
     else:
         player_id = False
     return player_id
+
+
+def matchmake():
+    if len(added_no_player) == 10:
+        chosen_players.sort(key=lambda player: player.mmr, reverse=True)
+        mmrDeltaList = []
+        Team1List = []
+        Team2List = []
+
+        team1 = []
+        team2 = []
+
+        for player in chosen_players:
+            print(str(player.player_name) + "\t" + str(player.mmr))
+            if calcteam_mmr(team1) <= calcteam_mmr(team2):
+                team1.append(player)
+            else:
+                team2.append(player)
+        print("MMR Delta: " + str(abs(calcmmr_delta(team1, team2))))
+        showteam(team1)
+        showteam(team2)
+
+        mmrDeltaList.append(calcmmr_delta(team1, team2))
+        Team1List.append(team1)
+        Team2List.append(team2)
+
+        i = 0
+        while True:
+            team1, team2 = correct(team1, team2)
+            if calcmmr_delta(team1, team2) in mmrDeltaList:
+                break
+            print("#############################################################\n" +
+                  "\t\t\tIteration " + str(i) + "\n" +
+                  "#############################################################\n")
+            mmrDeltaList.append(calcmmr_delta(team1, team2))
+            Team1List.append(team1)
+            Team2List.append(team2)
+            print("\n\n")
+            print("MMR Delta: " + str(abs(calcmmr_delta(team1, team2))))
+            showteam(team1)
+            showteam(team2)
+            i += 1
+
+        # use best teamcomposition
+        solutionIndex = mmrDeltaList.index(min(mmrDeltaList, key=abs))
+        print("\n\n\n")
+        print("#############################################################\n" +
+              "\t\t\tTeams\n" +
+              "#############################################################\n")
+        print("MMR Delta: " + str(abs(mmrDeltaList[solutionIndex])))
+        showteam(Team1List[solutionIndex])
+        showteam(Team2List[solutionIndex])
+
+        text = to_clipbord(team1, team2)
+    else:
+        gui_support.matchmake.set("Add 10 Player")
+
+    return text
+
+
+def correct(team1, team2):
+    'Corrects both Teams according to the last MMR Delta'
+    newTeam1 = team1
+    newTeam2 = team2
+    pairs = []
+    error = calcteam_mmr(team1) - calcteam_mmr(team2)
+    i = 0
+    for playeri in newTeam1:
+        j = 0
+        for playerj in newTeam2:
+            playerdiff = (playeri.mmr - playerj.mmr) * 2
+            pairs.append([playerdiff, newTeam1[i], newTeam2[j]])
+            j += 1
+        i += 1
+
+    pairs = sorted(pairs, key=itemgetter(0), reverse=False)
+    changingPair = min(pairs, key=lambda x: abs(x[0] - error))
+    newTeam1.remove(changingPair[1])
+    newTeam1.append(changingPair[2])
+    newTeam2.remove(changingPair[2])
+    newTeam2.append(changingPair[1])
+    if abs(calcmmr_delta(team1, team2)) > abs(calcmmr_delta(newTeam1, newTeam2)):
+        team1 = newTeam1
+        team2 = newTeam2
+    return team1, team2
+
+
+def calcteam_mmr(team):
+    'Get Teamcombinedmmr'
+    teamMMR = 0
+    for player in team:
+        teamMMR += player.mmr
+    return teamMMR
+
+
+def calcmmr_delta(team1, team2):
+    'MMR Delta between Teams'
+    delta = calcteam_mmr(team1) - calcteam_mmr(team2)
+    return delta
+
+
+def showteam(team):
+    'prints the Teamcomposition'
+    print("\nTeam:\n\tMMR:" + str(calcteam_mmr(team)))
+    for player in team:
+        print(player.player_name)
+
+
+def to_clipbord(team1, team2):
+    'copy result to clipbord'
+    text = ""
+    text += "Team1:\n"
+    for player in team1:
+        text += "\t" + player.player_name + "\n"
+    text += "\nTeam2:\n"
+    for player in team2:
+        text += "\t" + player.player_name + "\n"
+    clipboard.copy("\n" + text)
+    gui_support.matchmake_text.set(text)
+    return text
 
 
 if __name__ == "__main__":
