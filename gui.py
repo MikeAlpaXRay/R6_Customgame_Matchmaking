@@ -540,7 +540,6 @@ class ToolTip(tk.Toplevel):
         self.withdraw()
 
 
-
 def vp_start_gui(player_name_list):
     global val, w, root
     root = tk.Tk()
@@ -549,8 +548,6 @@ def vp_start_gui(player_name_list):
     top = Toplevel(root, player_name_list)
     gui_support.init(root, top)
     root.mainloop()
-
-
 
 
 def create_toplevel(rt, *args, **kwargs):
@@ -568,8 +565,6 @@ def destroy_toplevel():
     global w
     w.destroy()
     w = None
-
-
 
 
 if __name__ == '__main__':

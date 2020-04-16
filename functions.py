@@ -11,8 +11,6 @@ import calendar
 DEFAULT_MMR = 2000
 chosen_players = [None] * 10
 added_no_player = []
-dt = datetime.datetime.utcnow()
-unix = calendar.timegm(dt.utctimetuple())
 
 
 class Player:
