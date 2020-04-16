@@ -6,34 +6,40 @@ import clipboard
 import tkinter as tk
 from operator import itemgetter
 import gui_support
+import calendar
 
 DEFAULT_MMR = 2000
 chosen_players = [None] * 10
 added_no_player = []
+dt = datetime.datetime.utcnow()
+unix = calendar.timegm(dt.utctimetuple())
 
 
 class Player:
     def __init__(self, player_name, player_id, last_checked=True, mmr=True):
         self.player_name = player_name
-        if last_checked and mmr:
+        if type(last_checked) and type(mmr) == bool:
             if player_id:
                 self.player_id = player_id
             else:
                 raise ValueError
             self.last_checked = False
             self.mmr = self.update_mmr()
+            print(str(self.player_name) + "    " + str(self.mmr))
+            clipboard.copy(str(self.player_name) + "    " + str(self.mmr))
         else:
             self.player_id = player_id
             self.last_checked = last_checked
             self.mmr = mmr
 
     def check_id(self):
-        id_url = "https://r6tab.com/api/search.php?platform=uplay&search=" + self.player_name
+        dt = datetime.datetime.utcnow()
+        unix = calendar.timegm(dt.utctimetuple())
+        id_url = " https://r6.apitab.com/search/uplay/" + self.player_name + "?u=" + str(unix)
         id_request = requests.get(id_url)
         id_request = id_request.json()
-        if id_request['totalresults'] != 0:
-            id_request = id_request['results']
-            player_id = id_request[0]['p_id']
+        if id_request['foundmatch'] == True:
+            player_id = id_request['players'].keys()
         else:
             player_id = False
         return player_id
@@ -54,20 +60,23 @@ class Player:
                                          last_checked_day)
             diff = today - last_checked
         if not self.last_checked or diff.days >= 5:
-            player_stats_url = "https://r6tab.com/api/player.php?p_id=" + self.player_id
+            dt = datetime.datetime.utcnow()
+            unix = calendar.timegm(dt.utctimetuple())
+            player_stats_url = "https://r6.apitab.com/player/" + self.player_id + "?u=" + str(unix)
             player_stats = requests.get(player_stats_url).json()
+            player_stats_seasons = player_stats["seasons"]
             season_nr = 6
             player_mmr = 0
             count = 0
-            season = "season" + str(season_nr)
-            while season in player_stats.keys():
-                if player_stats[season] != 0:
-                    player_mmr += player_stats[season]
+            season = str(season_nr)
+            while season in player_stats_seasons.keys():
+                if player_stats_seasons[season]["maxmmr"] != "":
+                    player_mmr += player_stats_seasons[season]["maxmmr"]
                     count += 1
                 season_nr += 1
-                season = "season" + str(season_nr)
-            if player_stats["p_EU_currentmmr"] != 0:
-                player_mmr += player_stats["p_EU_currentmmr"]
+                season = str(season_nr)
+            if player_stats["ranked"]['actualmmr'] != "":
+                player_mmr += player_stats["ranked"]['actualmmr']
                 count += 1
 
             self.last_checked = str(today)
@@ -171,14 +180,13 @@ def load_json():
         json_data = json.load(json_file)
         for entry in json_data:
             players.append(entry)
-
     global player_list
     player_list = []
     for player in players:
-        player_list.append(Player(player['player_name'],
-                                  player['player_id'],
-                                  player['last_checked'],
-                                  player['mmr']))
+        player_list.append(Player(player_name=player['player_name'],
+                                  player_id=player['player_id'],
+                                  last_checked=player['last_checked'],
+                                  mmr=player['mmr']))
     global player_name_list
     player_name_list = []
     global player_id_list
@@ -231,7 +239,7 @@ def add_player(gui, no):
 
 
 def handle_add_player(gui, no):
-    gui_support.matchmake.set("Matchmake")
+    gui_support.match_make.set("Matchmake")
     player_added = add_player(gui, no - 1)
     if player_added:
         if no == 1:
@@ -360,12 +368,13 @@ def handle_remove_player(gui, no):
 
 
 def check_id(player_name):
-    id_url = "https://r6tab.com/api/search.php?platform=uplay&search=" + player_name
+    dt = datetime.datetime.utcnow()
+    unix = calendar.timegm(dt.utctimetuple())
+    id_url = " https://r6.apitab.com/search/uplay/" + player_name + "?u=" + str(unix)
     id_request = requests.get(id_url)
     id_request = id_request.json()
-    if id_request['totalresults'] != 0:
-        id_request = id_request['results']
-        player_id = id_request[0]['p_id']
+    if id_request['foundmatch']:
+        player_id = list(id_request['players'].keys())[0]
     else:
         player_id = False
     return player_id
@@ -424,9 +433,7 @@ def matchmake():
 
         text = to_clipbord(team1, team2)
     else:
-        gui_support.matchmake.set("Add 10 Player")
-
-    return text
+        gui_support.match_make.set("Add 10 Player")
 
 
 def correct(team1, team2):
@@ -487,7 +494,7 @@ def to_clipbord(team1, team2):
     for player in team2:
         text += "\t" + player.player_name + "\n"
     clipboard.copy("\n" + text)
-    gui_support.matchmake_text.set(text)
+    gui_support.match_make_text.set(text)
     return text
 
 

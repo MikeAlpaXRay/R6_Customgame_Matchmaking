@@ -1,62 +1,314 @@
 [
     {
-        "player_name": "MikeAlpaXRayLFT",
+        "player_name": "MikeAlpaX.NGNS",
         "player_id": "b3e3fc7c-9639-42d0-91e1-a67eec32c7ba",
-        "last_checked": "2020-03-02",
-        "mmr": 3543
+        "last_checked": "2020-04-16",
+        "mmr": 3534
     },
     {
         "player_name": "Quegga.WH",
         "player_id": "ab137c6f-51c5-41ea-bb78-5979bacc0a29",
-        "last_checked": "2020-03-02",
-        "mmr": 3202
+        "last_checked": "2020-04-16",
+        "mmr": 3191
     },
     {
         "player_name": "Lillbert",
         "player_id": "e1c35a45-2959-4118-b2fc-1d7e9f54ebe7",
-        "last_checked": "2020-03-02",
-        "mmr": 3618
+        "last_checked": "2020-04-16",
+        "mmr": 3634
     },
     {
         "player_name": "one.DR",
         "player_id": "0b601fd8-2271-4b60-9387-a33a863d7133",
-        "last_checked": "2020-03-02",
-        "mmr": 3097
+        "last_checked": "2020-04-16",
+        "mmr": 3112
     },
     {
-        "player_name": "HMB_Jojo",
+        "player_name": "Jojo.NGNS",
         "player_id": "bfd844c9-58c8-48e6-b8c6-4c50b22b2ae6",
-        "last_checked": "2020-03-02",
-        "mmr": 2770
+        "last_checked": "2020-04-16",
+        "mmr": 2736
     },
     {
         "player_name": "Bardrik",
         "player_id": "8add633a-d0c0-4a1c-9cf6-39d44da86da6",
-        "last_checked": "2020-03-02",
-        "mmr": 3521
+        "last_checked": "2020-04-16",
+        "mmr": 3530
     },
     {
         "player_name": "Bruder_Andreas",
         "player_id": "ae766f86-29f5-46df-af8c-6f7aba5fa3a7",
-        "last_checked": "2020-03-02",
-        "mmr": 3013
+        "last_checked": "2020-04-16",
+        "mmr": 2957
     },
     {
         "player_name": "Bruder_Petrus",
         "player_id": "379db793-3d0a-45bb-a660-8f30b0cb7bb1",
-        "last_checked": "2020-03-02",
-        "mmr": 3312
+        "last_checked": "2020-04-16",
+        "mmr": 3349
     },
     {
         "player_name": "Cryl93",
         "player_id": "5c3184e0-8f3b-44fd-828c-e722c18fddff",
-        "last_checked": "2020-03-02",
-        "mmr": 3017
+        "last_checked": "2020-04-16",
+        "mmr": 3080
     },
     {
         "player_name": "Pran._",
         "player_id": "14f01eef-d019-4651-a7e2-0ab59f5d26c5",
-        "last_checked": "2020-03-02",
-        "mmr": 3379
+        "last_checked": "2020-04-16",
+        "mmr": 3400
+    },
+    {
+        "player_name": "AyyWasabi",
+        "player_id": "ead762d8-00d5-48b5-9283-3c8de3f582a6",
+        "last_checked": "2020-04-16",
+        "mmr": 3547
+    },
+    {
+        "player_name": "pewhJ",
+        "player_id": "b2fc8691-84f2-459f-a263-be256f663eef",
+        "last_checked": "2020-04-16",
+        "mmr": 3676
+    },
+    {
+        "player_name": "Th3J0nny",
+        "player_id": "9545fc2e-aa1b-4e79-8344-63489b29f0d4",
+        "last_checked": "2020-04-16",
+        "mmr": 2762
+    },
+    {
+        "player_name": "Sharker41",
+        "player_id": "8a96075e-bb1e-45e3-bd59-5dd95d1eab02",
+        "last_checked": "2020-04-16",
+        "mmr": 2935
+    },
+    {
+        "player_name": "RocketSciPanda",
+        "player_id": "09a6b9df-c8da-4af5-b352-13a3bf166260",
+        "last_checked": "2020-04-16",
+        "mmr": 2765
+    },
+    {
+        "player_name": "PBE.M-Rage",
+        "player_id": "c31eda06-998d-4072-a9e5-adaed1aa1764",
+        "last_checked": "2020-04-16",
+        "mmr": 3408
+    },
+    {
+        "player_name": "PBE.Baqo",
+        "player_id": "7d5f4ffa-7831-4550-a9ae-a24d21d8fada",
+        "last_checked": "2020-04-16",
+        "mmr": 3605
+    },
+    {
+        "player_name": "PBE.JokeZ",
+        "player_id": "44913079-c4b1-4006-b51a-d4c0bcc50131",
+        "last_checked": "2020-04-16",
+        "mmr": 3516
+    },
+    {
+        "player_name": "PBE.Squee7e",
+        "player_id": "e36af389-b388-4650-ae72-04f304c8525b",
+        "last_checked": "2020-04-16",
+        "mmr": 3257
+    },
+    {
+        "player_name": "PBE.Kugel",
+        "player_id": "c81e557c-beb0-4e42-a2e0-84e0dc9228d3",
+        "last_checked": "2020-04-16",
+        "mmr": 3088
+    },
+    {
+        "player_name": "PBE.Tinkly",
+        "player_id": "7b50dfd0-67aa-4b9c-bc53-16da95565f55",
+        "last_checked": "2020-04-16",
+        "mmr": 3238
+    },
+    {
+        "player_name": "CookieForFox",
+        "player_id": "b39ff090-539d-4654-8937-19702ef45000",
+        "last_checked": "2020-04-16",
+        "mmr": 2457
+    },
+    {
+        "player_name": "Quehli.CRYO",
+        "player_id": "b4c15532-218f-4251-802e-aca15986d01a",
+        "last_checked": "2020-04-16",
+        "mmr": 3336
+    },
+    {
+        "player_name": "Cleo-",
+        "player_id": "5932161f-ba1c-4ec1-8b3e-e243b43843fe",
+        "last_checked": "2020-04-16",
+        "mmr": 3758
+    },
+    {
+        "player_name": "Ghooostiii.-",
+        "player_id": "4f3ad99c-cd6c-4970-889f-ad3c5ad56b28",
+        "last_checked": "2020-04-16",
+        "mmr": 4296
+    },
+    {
+        "player_name": "ERlKK",
+        "player_id": "05849398-f5f9-4e0b-8553-2f7fd161caaa",
+        "last_checked": "2020-04-16",
+        "mmr": 4633
+    },
+    {
+        "player_name": "Flamango.",
+        "player_id": "a7b30d06-06d6-4d5a-85d4-bbc82bb7cbff",
+        "last_checked": "2020-04-16",
+        "mmr": 4368
+    },
+    {
+        "player_name": "th3realmc",
+        "player_id": "b6a43717-cbd7-4023-bf49-6831de2023d2",
+        "last_checked": "2020-04-16",
+        "mmr": 4167
+    },
+    {
+        "player_name": "eriinchen",
+        "player_id": "4a47dc75-0bff-439c-9ca6-f529f86902b1",
+        "last_checked": "2020-04-16",
+        "mmr": 3294
+    },
+    {
+        "player_name": "Hyper_Fl0w",
+        "player_id": "2098f559-8203-4464-b449-c0278a30dbf8",
+        "last_checked": "2020-04-16",
+        "mmr": 2940
+    },
+    {
+        "player_name": "burh_",
+        "player_id": "ebd1075c-8767-420f-ae52-d25faab0519f",
+        "last_checked": "2020-04-16",
+        "mmr": 2858
+    },
+    {
+        "player_name": "BR0NCC",
+        "player_id": "ee0a42e1-996e-4145-ba30-e08b1645e92f",
+        "last_checked": "2020-04-16",
+        "mmr": 2602
+    },
+    {
+        "player_name": "MaXo_14",
+        "player_id": "2631cb6d-13fc-4496-b949-71157b0e5413",
+        "last_checked": "2020-04-16",
+        "mmr": 2655
+    },
+    {
+        "player_name": "G31er_jokomerte",
+        "player_id": "9560efec-4788-4e51-b621-abf8c7f50056",
+        "last_checked": "2020-04-16",
+        "mmr": 2880
+    },
+    {
+        "player_name": "Ramcy.HHaie",
+        "player_id": "b58f756f-986f-491c-ba1c-71c04415d816",
+        "last_checked": "2020-04-16",
+        "mmr": 3130
+    },
+    {
+        "player_name": "Jok3r.HHaie",
+        "player_id": "fcaae3f8-053f-477b-bdd4-00ff60f96b2f",
+        "last_checked": "2020-04-16",
+        "mmr": 3131
+    },
+    {
+        "player_name": "Kobe.HHaie",
+        "player_id": "3d60e409-ad0f-45d2-abe1-2b7f58e2c67c",
+        "last_checked": "2020-04-16",
+        "mmr": 3060
+    },
+    {
+        "player_name": "Estoy.HHaie",
+        "player_id": "cab1dbc6-ff8f-4071-80fa-be72c91ff7f3",
+        "last_checked": "2020-04-16",
+        "mmr": 3061
+    },
+    {
+        "player_name": "Kaiser.HHaie",
+        "player_id": "340fe40e-17ee-4d75-9502-0243983e7d15",
+        "last_checked": "2020-04-16",
+        "mmr": 2832
+    },
+    {
+        "player_name": "Rider_R6S",
+        "player_id": "75aba691-8c4f-4936-ab01-c639c61d8243",
+        "last_checked": "2020-04-16",
+        "mmr": 4469
+    },
+    {
+        "player_name": "FeRY-1.ECF",
+        "player_id": "6eeddae5-a749-447e-9e3d-22f684650d59",
+        "last_checked": "2020-04-16",
+        "mmr": 4077
+    },
+    {
+        "player_name": "Logic.Mantis",
+        "player_id": "9dd6b21b-c9d2-40ba-84fb-c14a6e917aaa",
+        "last_checked": "2020-04-16",
+        "mmr": 4028
+    },
+    {
+        "player_name": "Schmiddi.Mantis",
+        "player_id": "bed05e87-3dd8-48df-bbd2-a6e9e44aa78f",
+        "last_checked": "2020-04-16",
+        "mmr": 3989
+    },
+    {
+        "player_name": "Phirippu.LFT",
+        "player_id": "4a2a887f-6c71-4aa0-bf3e-618882dc5f9b",
+        "last_checked": "2020-04-16",
+        "mmr": 3884
+    },
+    {
+        "player_name": "Neemo.",
+        "player_id": "8ef4455e-c935-4319-88cc-c2b4b3c4e81f",
+        "last_checked": "2020-04-16",
+        "mmr": 4032
+    },
+    {
+        "player_name": "MrRecki",
+        "player_id": "8ae328c1-73d7-4900-8ba7-2ad523df9daf",
+        "last_checked": "2020-04-16",
+        "mmr": 3382
+    },
+    {
+        "player_name": "Alexo.IRON",
+        "player_id": "f9e3601e-ffdd-4fe6-a041-588aff034258",
+        "last_checked": "2020-04-16",
+        "mmr": 2908
+    },
+    {
+        "player_name": "CakeBummm.Ae",
+        "player_id": "42127728-37af-479a-ba45-8c31ef975e05",
+        "last_checked": "2020-04-16",
+        "mmr": 4256
+    },
+    {
+        "player_name": "Kilian1020",
+        "player_id": "aea81a1b-4749-4d46-8931-102d3156c5ab",
+        "last_checked": "2020-04-16",
+        "mmr": 2845
+    },
+    {
+        "player_name": "ttheo.",
+        "player_id": "5c22a76d-8b90-4837-b8f7-b99a04ea0ad6",
+        "last_checked": "2020-04-16",
+        "mmr": 3353
+    },
+    {
+        "player_name": "Loom.DR",
+        "player_id": "19877e39-c70d-4131-b12b-e59115ff97d0",
+        "last_checked": "2020-04-16",
+        "mmr": 3244
+    },
+    {
+        "player_name": "BeleafInMe",
+        "player_id": "b81f2d52-85ac-4537-b8f3-5c1a99dd8293",
+        "last_checked": "2020-04-16",
+        "mmr": 2837
     }
 ]

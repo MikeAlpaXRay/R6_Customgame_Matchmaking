@@ -1,3 +1,4 @@
+from time import time, localtime, strftime
 import tkinter as tk
 import functions as fnc
 import gui_support
@@ -466,7 +467,7 @@ class Toplevel:
         self.Matchmaking_Text.configure(cursor="arrow")
         self.Matchmaking_Text.configure(disabledforeground="#a3a3a3")
         self.Matchmaking_Text.configure(foreground="#000000")
-        self.Matchmaking_Text.configure(textvariable=gui_support.matchmake_text)
+        self.Matchmaking_Text.configure(textvariable=gui_support.match_make_text)
 
         self.Matchmake_Button = tk.Button(top)
         self.Matchmake_Button.place(relx=0.422, rely=0.083, height=20, width=120)
@@ -479,7 +480,7 @@ class Toplevel:
         self.Matchmake_Button.configure(highlightcolor="black")
         self.Matchmake_Button.configure(pady="0")
         self.Matchmake_Button.configure(text='''Matchmake''')
-        self.Matchmake_Button.configure(textvariable=gui_support.matchmake)
+        self.Matchmake_Button.configure(textvariable=gui_support.match_make)
         self.Matchmake_Button.configure(command=fnc.matchmake)
 
 
@@ -512,76 +513,64 @@ class ToolTip(tk.Toplevel):
         self.wdgt.bind('<Motion>', self.move, '+')
 
     def spawn(self, event=None):
-        :
-
-    The
-    event
-    that
-    called
-    this
-    funciton
-    """
-    self.visible = 1
-    self.after(int(self.delay * 1000), self.show)
-
-def show(self):
-    if self.visible == 1 and time() - self.lastMotion > self.delay:
-        self.visible = 2
-    if self.visible == 2:
-        self.deiconify()
-
-def move(self, event):
-    self.lastMotion = time()
-    if self.follow is False:
-        self.withdraw()
         self.visible = 1
+        self.after(int(self.delay * 1000), self.show)
 
-    self.geometry('+%i+%i' % (event.x_root + 20, event.y_root - 10))
-    try:
-        self.msgVar.set(self.msgFunc())
-    except:
-        pass
-    self.after(int(self.delay * 1000), self.show)
+    def show(self):
+        if self.visible == 1 and time() - self.lastMotion > self.delay:
+            self.visible = 2
+        if self.visible == 2:
+            self.deiconify()
 
-def hide(self, event=None):
-    self.visible = 0
-    self.withdraw()
+    def move(self, event):
+        self.lastMotion = time()
+        if self.follow is False:
+            self.withdraw()
+            self.visible = 1
+
+        self.geometry('+%i+%i' % (event.x_root + 20, event.y_root - 10))
+        try:
+            self.msgVar.set(self.msgFunc())
+        except:
+            pass
+        self.after(int(self.delay * 1000), self.show)
+
+    def hide(self, event=None):
+        self.visible = 0
+        self.withdraw()
 
 
 
 def vp_start_gui(player_name_list):
-'''Starting point when module is the main routine.'''
-global val, w, root
-root = tk.Tk()
-gui_support.set_Tk_var()
-global top
-top = Toplevel(root, player_name_list)
-gui_support.init(root, top)
-root.mainloop()
+    global val, w, root
+    root = tk.Tk()
+    gui_support.set_Tk_var()
+    global top
+    top = Toplevel(root, player_name_list)
+    gui_support.init(root, top)
+    root.mainloop()
 
 
 
 
 def create_toplevel(rt, *args, **kwargs):
-'''Starting point when module is imported by another module.
-   Correct form of call: 'create_Toplevel1(root, *args, **kwargs)' .'''
-global w, w_win, root
-# rt = root
-root = rt
-w = tk.Toplevel(root)
-gui_support.set_Tk_var()
-top = Toplevel(w)
-gui_support.init(w, top, *args, **kwargs)
-return (w, top)
+    global w, w_win, root
+    # rt = root
+    root = rt
+    w = tk.Toplevel(root)
+    gui_support.set_Tk_var()
+    top = Toplevel(w)
+    gui_support.init(w, top, *args, **kwargs)
+    return (w, top)
 
 
 def destroy_toplevel():
-global w
-w.destroy()
-w = None
+    global w
+    w.destroy()
+    w = None
 
 
 
 
 if __name__ == '__main__':
-vp_start_gui()
+    vp_start_gui()
