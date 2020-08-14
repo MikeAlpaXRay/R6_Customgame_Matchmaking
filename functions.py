@@ -22,7 +22,7 @@ class Player:
             else:
                 raise ValueError
             self.last_checked = False
-            self.mmr = self.update_mmr()
+            self.mmr = self.update_player()
             print(str(self.player_name) + "    " + str(self.mmr))
             clipboard.copy(str(self.player_name) + "    " + str(self.mmr))
         else:
@@ -45,7 +45,7 @@ class Player:
     def update_name(self, new_player_name):
         self.player_name = new_player_name
 
-    def update_mmr(self):
+    def update_player(self):
         today = datetime.date.today()
         diff = today - today
         if self.last_checked:
@@ -62,6 +62,7 @@ class Player:
             unix = calendar.timegm(dt.utctimetuple())
             player_stats_url = "https://r6.apitab.com/player/" + self.player_id + "?u=" + str(unix)
             player_stats = requests.get(player_stats_url).json()
+            self.player_name = player_stats["player"]["p_name"]
             player_stats_seasons = player_stats["seasons"]
             season_nr = 6
             player_mmr = 0
@@ -209,7 +210,7 @@ def add_player(gui, no):
     if new_player_name in player_name_list:
         index = player_name_list.index(new_player_name)
         player_object = player_list[index]
-        player_object.update_mmr()
+        player_object.update_player()
         player_name_list[index] = ""
         player_added = True
         chosen_players[no] = player_object
@@ -222,7 +223,7 @@ def add_player(gui, no):
                 player_object = player_list[index]
                 player_object.update_name(new_player_name)
                 player_name_list[index] = ""
-                player_object.update_mmr()
+                player_object.update_player()
                 # print("neuer Spielername")
             else:
                 player_object = Player(new_player_name, new_player_id)
